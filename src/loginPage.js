@@ -1,8 +1,9 @@
-import { useForm} from "./Hooks";
+import { useFetch, useForm} from "./Hooks";
 
 
 export default function Login(){
     const [inputs,handleChange] = useForm();
+    const [data, setUrl] = useFetch();
 
     return (
     <div>
@@ -20,12 +21,17 @@ export default function Login(){
             <label for='username'>
                 Password:
             </label>
-            {<input 
+            <input 
                 name='password' 
                 type="password" 
                 value={inputs.password || ""} 
                 onChange={handleChange}
-            />}
+            />
+            <input 
+                name="submit"
+                type="submit"
+                value='Login'
+            />
         </form>
     </div>
     )

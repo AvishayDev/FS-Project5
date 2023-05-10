@@ -1,13 +1,32 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Login from './loginPage';
+import { useEffect } from 'react';
+import Layout from './Layout';
+import Info from './Info';
+import Todos from './Todos';
+import Posts from './Posts';
+import Albums from './Albums';
+import Album from './Album';
 
 function App() {
+  const navigate = useNavigate()
+
+  useEffect(()=> {navigate('/users/3')},[])
+
   return (
     <>
     <Routes>
       <Route path='/'>
-        <Route index element={<Login/>} />
+        <Route path='login' element={<Login/>} />
+        <Route path='users/:id' element={<Layout/>}>
+            <Route path='info' element={<Info/>}/>
+            <Route path='todos' element={<Todos/>}/>
+            <Route path='posts' element={<Posts/>}/>
+            <Route path='albums' element={<Albums/>}>
+              <Route path=':id/photos' element={<Album/>}/>
+            </Route>
+        </Route>
       </Route>
     </Routes>
     </>
