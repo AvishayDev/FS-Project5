@@ -5,7 +5,7 @@ import {  useState } from "react";
 
 export default function Login(){
     const [inputs,handleChange] = useForm();
-    const [user, setUser] = useLocalStorage('loggedUser','');
+    const [_, setUser] = useLocalStorage('loggedUser',null);
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -16,9 +16,8 @@ export default function Login(){
 
         const data = await callFetch('https://jsonplaceholder.typicode.com/users');
 
-        const user = data.find((user) => user.username === username);
+        let user = data.find((user) => user.username === username);
         if (user){
-            console.log(user)
             setUser(user);
             navigate(`/users/${user.id}`);
         }
