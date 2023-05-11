@@ -3,7 +3,7 @@ import { useState,useEffect } from "react"
 
 // useForm Hook
 export function useForm(){
-    const [inputs,setInputs] = useState({});
+    const [inputs, setInputs] = useState({});
     
     const handleChange = (event) => {
         const {name, value, type, checked} = event.target;
@@ -17,15 +17,22 @@ export function useForm(){
 // useFetch Hook
 const controller = new AbortController();
 
+export async function callFetch(url){
+  //setTimeout(controller.abort,1000);      
+  const res = await fetch(url,{ signal: controller.signal })
+  const data = await res.json()
+  return data
+}
+
 export function useFetch (urlApi){
     const [url, setUrl] = useState(urlApi)
     const [data, setData] = useState(null);
   
     useEffect(() => {
-      //setTimeout(controller.abort,1000);      
-      fetch(url,{ signal: controller.signal })
-        .then((res) => res.json())
-        .then((data) => setData(data));
+      (async () => {
+        const resData = await callFetch(url);
+        setData(resData);
+      })();
     }, [url]);
   
     return [data, setUrl];

@@ -12,7 +12,7 @@ import Album from './Album';
 function App() {
   const navigate = useNavigate()
 
-  useEffect(()=> {navigate('/users/3')},[])
+  useEffect(()=> {navigate('/login')},[])
 
   return (
     <>
