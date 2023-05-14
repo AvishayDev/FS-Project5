@@ -29,10 +29,15 @@ export function useFetch (urlApi){
     const [data, setData] = useState(null);
   
     useEffect(() => {
-      (async () => {
-        const resData = await callFetch(url);
-        setData(resData);
-      })();
+      fetch(url)
+      .then((res) => {
+        res.json()
+      }).then((resData)=> setData(resData))
+      .catch((err) => {
+        setData('Something Goes Wrong..\nPlease Try Again')
+      });
+
+      return ()=>controller.abort();
     }, [url]);
   
     return [data, setUrl];
@@ -47,16 +52,30 @@ function getSavedItem(key,initialValue){
   return initialValue
 }
 
+export function clearKey(key){
+  localStorage.removeItem(key);
+}
+
 export function useLocalStorage(key, initialValue){
   const [value, setValue] = useState(() => {
     return getSavedItem(key, initialValue)
   })
 
-  useEffect(() => {
-    console.log('LocalStorage')
-    localStorage.setItem(key, JSON.stringify(value))
-  },[key, value])
+  const saveInLS = (val) => {
+    setValue(val)
+    localStorage.setItem(key, JSON.stringify(val))
+  }
 
-  return [value, setValue]
+  return [value, saveInLS]
 }
 
+//   useErrorMessage Hook
+export function useErrorMessage(errMessage){
+  const [errorMessage, setErrorMessage] = useState(errMessage);
+
+  useEffect(()=>{
+    return ()=>setTimeout(()=>setErrorMessage(''),2000);
+  },[errorMessage]);
+
+  return [errorMessage, setErrorMessage]
+}
