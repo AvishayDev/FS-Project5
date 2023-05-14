@@ -6,7 +6,6 @@ const InfoComponent = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        // Fetch user data from api
         const storedUser = localStorage.getItem('loggedUser');
         if (storedUser) {
           setUser(JSON.parse(storedUser));
@@ -25,15 +24,15 @@ const InfoComponent = () => {
       {user.name ? (
         <div>
           <h2>{user.name}</h2>
-          <p>Username: {user.username}</p>
-          <p>Email: {user.email}</p>
-          <p>Phone: {user.phone}</p>
-          <p>Website: {user.website}</p>
-          <p>Company: {user.company.name}</p>
-          <p>Street: {user.address.street}</p>
-          <p>Suite: {user.address.suite}</p>
-          <p>City: {user.address.city}</p>
-          <p>Zip Code: {user.address.zipcode}</p>
+          <p><strong>Username:</strong>  {user.username}</p>
+          <p><strong>Email:</strong>  {user.email}</p>
+          <p><strong>Phone:</strong>  {user.phone}</p>
+          <p><strong>Website:</strong>  {user.website}</p>
+          <p><strong>Company:</strong>  {user.company.name}</p>
+          <p><strong>Street:</strong>  {user.address.street}</p>
+          <p><strong>Suite: </strong> {user.address.suite}</p>
+          <p><strong>City:</strong>  {user.address.city}</p>
+          <p><strong>Zip Code:</strong> {user.address.zipcode}</p>
         </div>
       ) : (
         <p>Loading user information...</p>
