@@ -29,6 +29,7 @@ export default function Posts(){
                                 <p>{post.body}</p>
                                 <ul>{index === selectedIndex ? 
                                     isLoading ? 'Loading...' :
+                                    errorMessage ? errorMessage :
                                     comments.map((comment => {
                                         return (<div>
                                                     <h3>{comment.name}</h3>

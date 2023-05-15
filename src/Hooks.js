@@ -27,19 +27,26 @@ export async function callFetch(url){
 export function useFetch (urlApi, initialValue){
     const [url, setUrl] = useState(urlApi)
     const [data, setData] = useState(initialValue);
-    const [error,setError] = useErrorMessage();
+    const [error,setError] = useState('');
     const [isLoading,setIsLoading] = useState(false)
-  
+    const MINWAIT = 400;
+
     useEffect(() => {
+      const start = performance.now()
       setIsLoading(true)
+      setError('')
+
       fetch(url)
       .then((res) => res.json())
       .then((resData) => {
-        setData(resData)
-        setIsLoading(false)
+        const total = Math.round(performance.now() -start)
+        setTimeout(()=>{
+          setData(resData)
+          setIsLoading(false)
+        },total < MINWAIT ? MINWAIT-total : 0)
       })
       .catch((err) => {
-        setError(err)
+        setError('Something Went Wrong...\n Please Try Again!')
         setIsLoading(false)
       });
       
