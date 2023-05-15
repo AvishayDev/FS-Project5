@@ -24,36 +24,46 @@ export async function callFetch(url){
   return data
 }
 
-export function useFetch (urlApi){
+export function useFetch (urlApi, initialValue){
     const [url, setUrl] = useState(urlApi)
-    const [data, setData] = useState(null);
+    const [data, setData] = useState(initialValue);
+    const [error,setError] = useErrorMessage();
+    const [isLoading,setIsLoading] = useState(false)
   
     useEffect(() => {
+      setIsLoading(true)
       fetch(url)
-      .then((res) => {
-        res.json()
-      }).then((resData)=> setData(resData))
+      .then((res) => res.json())
+      .then((resData) => {
+        setData(resData)
+        setIsLoading(false)
+      })
       .catch((err) => {
-        setData('Something Goes Wrong..\nPlease Try Again')
+        setError(err)
+        setIsLoading(false)
       });
-
-      return ()=>controller.abort();
+      
+      return () => controller.abort();
     }, [url]);
   
-    return [data, setUrl];
+    return [data, setUrl, error, isLoading];
   };
 
   // useLocalStorage Hook
-function getSavedItem(key,initialValue){
-  const savedValue = JSON.parse(localStorage.getItem(key))
+export function clearKeyLS(key){
+  localStorage.removeItem(key);
+}
+
+export function getItemLS(key){
+  return JSON.parse(localStorage.getItem(key))
+}
+
+function getSavedItem(key, initialValue){
+  const savedValue = getItemLS(key)
   if (savedValue) return savedValue
 
   if (initialValue instanceof Function) return initialValue()
   return initialValue
-}
-
-export function clearKey(key){
-  localStorage.removeItem(key);
 }
 
 export function useLocalStorage(key, initialValue){
@@ -70,8 +80,8 @@ export function useLocalStorage(key, initialValue){
 }
 
 //   useErrorMessage Hook
-export function useErrorMessage(errMessage){
-  const [errorMessage, setErrorMessage] = useState(errMessage);
+export function useErrorMessage(){
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(()=>{
     return ()=>setTimeout(()=>setErrorMessage(''),2000);

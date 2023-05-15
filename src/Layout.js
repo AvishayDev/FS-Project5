@@ -1,5 +1,5 @@
 import { Link, Outlet, useParams } from "react-router-dom";
-import { clearKey } from "./Hooks";
+import { clearKeyLS } from "./Hooks";
 export default function Layout(){
     const { id } = useParams()
     
@@ -14,7 +14,7 @@ export default function Layout(){
             <br/>
             <Link to='albums'>Albums</Link>
             <br/>
-            <Link to='/login' onClick={()=>clearKey('loggedUser')}>Logout</Link>
+            <Link to='/login' onClick={()=>clearKeyLS('loggedUser')}>Logout</Link>
         </div>
 
         <Outlet context={{userId : id}}/>

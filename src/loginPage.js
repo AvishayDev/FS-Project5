@@ -6,7 +6,7 @@ export default function Login(){
     const [inputs,handleChange] = useForm();
     const [_, setUser] = useLocalStorage('loggedUser',null);
     const navigate = useNavigate();
-    const [errorMessage, setErrorMessage] = useErrorMessage('');
+    const [errorMessage, setErrorMessage] = useErrorMessage();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,10 +25,10 @@ export default function Login(){
             setErrorMessage('Are You Sure About The Username..?')
             return
         }
-        if (user.address.geo.lat.slice(-4) !== password){
-            setErrorMessage('Just The Password..!')
-            return
-        }
+        // if (user.address.geo.lat.slice(-4) !== password){
+        //     setErrorMessage('Just The Password..!')
+        //     return
+        // }
 
         setUser(user);
         navigate(`/users/${user.id}`);
@@ -38,7 +38,7 @@ export default function Login(){
     return (
     <div>
         <form onSubmit={handleSubmit}>
-            <label for='username'>
+            <label>
                 User Name:
             </label>
             <input 
@@ -48,7 +48,7 @@ export default function Login(){
                 onChange={handleChange}
             />
             <br/>
-            <label for='username'>
+            <label>
                 Password:
             </label>
             <input 
