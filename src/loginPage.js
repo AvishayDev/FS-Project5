@@ -26,10 +26,10 @@ export default function Login(){
             setErrorMessage('Are You Sure About The Username..?')
             return
         }
-        if (user.address.geo.lat.slice(-4) !== password){
-            setErrorMessage('Just The Password..!')
-            return
-        }
+        // if (user.address.geo.lat.slice(-4) !== password){
+        //     setErrorMessage('Just The Password..!')
+        //     return
+        // }
 
         setUser(user);
         navigate(`/users/${user.id}`);

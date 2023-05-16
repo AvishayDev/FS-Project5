@@ -1,6 +1,9 @@
 import { useOutletContext } from "react-router-dom";
 import { useFetch } from "./Hooks";
 import { useState } from "react";
+import  Post  from "./Post";
+import Comment from './Comment';
+import './Posts.css'
 
 export default function Posts(){
     const context = useOutletContext();
@@ -8,8 +11,8 @@ export default function Posts(){
     const [posts] = useFetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`,[])
     const [comments,setCommentsUrl,errorMessage,isLoading] = useFetch('',[])
     const [selectedIndex,setIndex] = useState(null)
-    const defaultStyle = {background:'white'}
-    const clickStyle = {background:'blue'}
+    const defaultStyle = 'default-style'
+    const clickStyle = 'click-style'
 
 
     return (
@@ -24,18 +27,13 @@ export default function Posts(){
                             setCommentsUrl(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
                         }
                         return (
-                            <div style={index === selectedIndex ? clickStyle : defaultStyle} onClick={handleClick}>
-                                <h1>{post.title}</h1>
-                                <p>{post.body}</p>
+                            <div className={index === selectedIndex ? clickStyle : defaultStyle} onClick={handleClick}>
+                                <Post post={post}/>
                                 <ul>{index === selectedIndex ? 
                                     isLoading ? 'Loading...' :
                                     errorMessage ? errorMessage :
                                     comments.map((comment => {
-                                        return (<div>
-                                                    <h3>{comment.name}</h3>
-                                                    <p>{comment.email}</p>
-                                                    <p>{comment.body}</p>
-                                                </div>)
+                                        return <Comment comment={comment}/>
                                 })):<></>}</ul>
                             </div>
                         )
