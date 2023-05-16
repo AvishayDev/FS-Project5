@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { callFetch, useErrorMessage, useForm, useLocalStorage} from "./Hooks";
+import './loginpage.css'
 
 
 export default function Login(){
@@ -25,10 +26,10 @@ export default function Login(){
             setErrorMessage('Are You Sure About The Username..?')
             return
         }
-        // if (user.address.geo.lat.slice(-4) !== password){
-        //     setErrorMessage('Just The Password..!')
-        //     return
-        // }
+        if (user.address.geo.lat.slice(-4) !== password){
+            setErrorMessage('Just The Password..!')
+            return
+        }
 
         setUser(user);
         navigate(`/users/${user.id}`);
@@ -36,34 +37,39 @@ export default function Login(){
 
 
     return (
-    <div>
-        <form onSubmit={handleSubmit}>
-            <label>
-                User Name:
-            </label>
-            <input 
-                name='username' 
-                type="text" 
-                value={inputs.username || ""} 
-                onChange={handleChange}
-            />
-            <br/>
-            <label>
-                Password:
-            </label>
-            <input 
-                name='password' 
-                type="password" 
-                value={inputs.password || ""} 
-                onChange={handleChange}
-            />
-            <h4>{errorMessage}</h4>
-            <input 
-                name="submit"
-                type="submit"
-                value='Login'
-            />
-        </form>
-    </div>
+    <>
+        <div className="hv-wrapper">
+            <div id="login-form">
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Username:
+                    </label>
+                    <input 
+                        name='username' 
+                        type="text" 
+                        value={inputs.username || ""} 
+                        onChange={handleChange}
+                    />
+                    <br/>
+                    <label>
+                        Password:
+                    </label>
+                    <input 
+                        name='password' 
+                        type="password" 
+                        value={inputs.password || ""} 
+                        onChange={handleChange}
+                    />
+                    <h4>{errorMessage}</h4>
+                    <input 
+                        name="submit"
+                        type="submit"
+                        value='Login'
+                    />
+                </form>
+            </div>
+        </div>
+    </>
+        
     )
 }

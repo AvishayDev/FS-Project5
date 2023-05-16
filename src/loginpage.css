@@ -1,0 +1,77 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+    background-color: aliceblue;
+}
+
+#login-form{
+    width: min-content;
+    background-color: azure;
+    display: block;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow:
+        1.1px 2.9px 16.9px rgba(0, 0, 0, 0.041),
+        2.7px 7.2px 31.4px rgba(0, 0, 0, 0.054),
+        5.2px 13.6px 44.2px rgba(0, 0, 0, 0.063),
+        9.1px 24px 56.7px rgba(0, 0, 0, 0.071),
+        16.4px 43.3px 75.4px rgba(0, 0, 0, 0.082),
+        39px 103px 142px rgba(0, 0, 0, 0.11)
+    ;
+}
+
+.hv-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+input[type="submit"] {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%; 
+    transition: background-color 0.3s ease;
+    
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #333;
+  }
+
+  input[type="text"],
+input[type="password"] {
+  background-color: #e9ffff;
+  color: #333;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  width: 300px;
+  transition: box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type="password"] {
+  letter-spacing: 2px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #333;
+}
+
+  
