@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function Posts(){
     const context = useOutletContext();
     const { userId } = context
-    const [posts,setUrl] = useFetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`,[])
+    const [posts] = useFetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`,[])
     const [comments,setCommentsUrl,errorMessage,isLoading] = useFetch('',[])
     const [selectedIndex,setIndex] = useState(null)
     const defaultStyle = {background:'white'}
