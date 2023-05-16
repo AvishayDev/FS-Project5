@@ -1,7 +1,12 @@
-import { useOutletContext } from "react-router-dom";
+import { Outlet, useOutletContext, useParams } from "react-router-dom";
 
-export default function Album(){
-    const context = useOutletContext()
-    
-    return (<h1>Album</h1>)
+export default function Album() {
+    const { id } = useParams()
+
+    return (
+        <>
+            <h1>Album {id}</h1>
+            <Outlet context={{ albumId: id }} />
+        </>
+    );
 }

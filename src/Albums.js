@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link, Outlet, useOutletContext } from 'react-router-dom';
 
 export default function Albums() {
   const { userId } = useOutletContext();
@@ -28,10 +28,11 @@ export default function Albums() {
       <ul>
         {albums.map((album) => (
           <li key={album.id}>
-            <Link to={`${album.id}/album/`}>{album.title}</Link>
+            <Link to={`${album.id}/album`}>{album.title}</Link>
           </li>
         ))}
       </ul>
+      <Outlet />
     </div>
   );
 }
