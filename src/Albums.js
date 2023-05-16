@@ -28,7 +28,7 @@ export default function Albums() {
       <ul>
         {albums.map((album) => (
           <li key={album.id}>
-            <Link to={`${album.id}/album`}>{album.title}</Link>
+            <Link to={`${album.id}/photos`}>{album.title}</Link>
           </li>
         ))}
       </ul>

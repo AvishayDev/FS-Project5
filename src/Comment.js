@@ -6,8 +6,8 @@ export default function Comment({comment}){
 
     return (
         <div className="comment-div">
-            <h3>{getTitle(comment.name)}</h3>
-            <p>{comment.email}</p>
+            <h2>{comment.name}</h2>
+            <h4>{comment.email}</h4>
             <p>{comment.body}</p>
         </div>
     )

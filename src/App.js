@@ -8,6 +8,7 @@ import Todos from './Todos';
 import Posts from './Posts';
 import Albums from './Albums';
 import Album from './Album';
+import Home from './Home';
 
 function App() {
   const navigate = useNavigate()
@@ -20,11 +21,12 @@ function App() {
       <Route path='/'>
         <Route path='login' element={<Login/>} />
         <Route path='users/:id' element={<Layout/>}>
+            <Route index element={<Home/>}/>
             <Route path='info' element={<Info/>}/>
             <Route path='todos' element={<Todos/>}/>
             <Route path='posts' element={<Posts/>}/>
             <Route path='albums' element={<Albums/>}>
-              <Route path=':id/album' element={<Album/>}/>
+              <Route path=':id/photos' element={<Album/>}/>
             </Route>
         </Route>
       </Route>
