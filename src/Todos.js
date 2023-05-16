@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import { callFetch, useErrorMessage, useForm } from './Hooks';
 
 function Todos() {
   const [todos, setTodos] = useState([]);
   const [sortCriterion, setSortCriterion] = useState(null);
   const { id } = useParams();
-
+  const [inputs,handleChange] = useForm()
+  const [errorMessage,setErrorMessage] = useErrorMessage()
+  
   useEffect(() => {
-    const fetchTodos = async () => {
-      try {
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/todos?userId=${id}`
-        );
-        const data = await response.json();
+    return  async () => {
+      try{
+        const data = await callFetch(`https://jsonplaceholder.typicode.com/todos?userId=${id}`)
         setTodos(data);
-      } catch (error) {
-        console.error('Error fetching todos:', error);
+      }catch{
+        setErrorMessage("Oops..! You're Not conected!")
       }
-    };
-
-    fetchTodos();
+    }
   }, []);//only first time 
 
   useEffect(() => {
@@ -39,24 +37,11 @@ function Todos() {
     }
   }, [sortCriterion]);
 
-  const handleCheckboxChange = (todoId) => {
-    setTodos((prevTodos) => {
-      return prevTodos.map((todo) => {
-        if (todo.id === todoId) {
-          return {
-            ...todo,
-            completed: !todo.completed
-          };
-        }
-        return todo;
-      });
-    });
-  };
-
 
   return (
     <div>
       <h2>Todos:</h2>
+      <h4>{errorMessage}</h4>
       <div>
         <select value={sortCriterion} onChange={(event) => setSortCriterion(event.target.value)}>
           <option value="">Sort by:</option>
@@ -69,9 +54,11 @@ function Todos() {
       {todos.map((todo) => (
         <div key={todo.id}>
           <input
+          name={`chechbox${todo.id}`}
             type="checkbox"
-            checked={todo.completed}
-            onChange={() => handleCheckboxChange(todo.id)}
+            checked={inputs[`chechbox${todo.id}`] === undefined ? 
+                      todo.completed : inputs[`chechbox${todo.id}`]}
+            onChange={handleChange}
           />
           <span>{todo.title}</span>
         </div>
