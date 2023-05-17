@@ -39,39 +39,42 @@ function Todos() {
   }, [sortCriterion]);
 
   return (
-    <div className="click-style">
-      <h2 className="default-style">Todos:</h2>
-      <h4 className="default-style">{errorMessage}</h4>
-      <div className="default-style">
-        <select
-          className="default-style"
-          value={sortCriterion}
-          onChange={(event) => setSortCriterion(event.target.value)}
-        >
-          <option value="">Sort by:</option>
-          <option value="id">ID</option>
-          <option value="completed">Completed</option>
-          <option value="title">Title</option>
-          <option value="random">Random</option>
-        </select>
-      </div>
-      {todos.map((todo) => (
-        <div key={todo.id} className="comment-div">
-          <input
+    <>
+      <h1>Todos</h1>
+      <div className="click-style">
+        {errorMessage && <h4 className="default-style">{errorMessage}</h4>}
+        <div>
+          <select
             className="default-style"
-            name={`checkbox${todo.id}`}
-            type="checkbox"
-            checked={
-              inputs[`checkbox${todo.id}`] === undefined
-                ? todo.completed
-                : inputs[`checkbox${todo.id}`]
-            }
-            onChange={handleChange}
-          />
-          <span className="default-style">{todo.title}</span>
+            value={sortCriterion}
+            onChange={(event) => setSortCriterion(event.target.value)}
+          >
+            <option value="">Sort by:</option>
+            <option value="id">ID</option>
+            <option value="completed">Completed</option>
+            <option value="title">Title</option>
+            <option value="random">Random</option>
+          </select>
         </div>
-      ))}
-    </div>
+        {todos.map((todo) => (
+          <div key={todo.id} className="comment-div">
+            <input
+              className="default-style"
+              name={`checkbox${todo.id}`}
+              type="checkbox"
+              checked={
+                inputs[`checkbox${todo.id}`] === undefined
+                  ? todo.completed
+                  : inputs[`checkbox${todo.id}`]
+              }
+              onChange={handleChange}
+            />
+            <span >{todo.title}</span>
+          </div>
+        ))}
+      </div>
+    </>
+    
   );
 }
 

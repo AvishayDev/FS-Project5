@@ -15,11 +15,11 @@ export function useForm(){
 }
 
 // useFetch Hook
-const controller = new AbortController();
 
 export async function callFetch(url){
-  //setTimeout(controller.abort, 1000);      
-  const res = await fetch(url,{ signal: controller.signal })
+  // const controller = new AbortController();
+  // setTimeout(controller.abort(), 1000);      
+  const res = await fetch(url) //,{ signal: controller.signal }
   const data = await res.json()
   return data
 }
@@ -32,6 +32,7 @@ export function useFetch (urlApi, initialValue){
     const MINWAIT = 400;
 
     useEffect(() => {
+      const controller = new AbortController();
       const start = performance.now()
       setIsLoading(true)
       setError('')

@@ -14,12 +14,12 @@ export default function Album() {
                 );
                 const data = await response.json();
                 setPhotos(data);
-                console.log(data);
             } catch (error) {
                 console.error('Error fetching ten first pics:', error);
             }
         };
-    
+        
+        console.log('id call')
         fetchAlbums();
     }, [id]);
 
@@ -31,12 +31,12 @@ export default function Album() {
             );
             const data = await response.json();
             setPhotos((prevPhotos) => [...prevPhotos, ...data]);
-            console.log(data);
         } catch (error) {
             console.error('Error fetching ten more pics:', error);
         }
     };
 
+    console.log('loaded photoes call')
     fetchTenMore();
 }, [loadedPhotos]);
 
@@ -53,7 +53,7 @@ export default function Album() {
                     <h2>Photos from Album {id} </h2>
                     <div className="album-photo">
                         {photos.map((photo) => (
-                            <img src={photo.thumbnailUrl}/>   
+                            <img src={photo.thumbnailUrl} alt={photo.title}/>   
                         ))}
                     </div>
                 </div>

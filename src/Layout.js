@@ -1,20 +1,18 @@
-import { Link, Outlet, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { clearKeyLS } from "./Hooks";
+import './Layout.css'
+
 export default function Layout(){
     const { id } = useParams()
     
     return (
         <>
-        <div>
-            <Link to='info'>Info</Link>
-            <br/>
-            <Link to='todos'>Todos</Link>
-            <br/>
-            <Link to='posts'>Posts</Link>
-            <br/>
-            <Link to='albums'>Albums</Link>
-            <br/>
-            <Link to='/login' onClick={()=>clearKeyLS('loggedUser')}>Logout</Link>
+        <div class="container">
+            <NavLink className='nav-link left-nav' to='info'>Info</NavLink>
+            <NavLink className='nav-link' to='todos'>Todos</NavLink>
+            <NavLink className='nav-link' to='posts'>Posts</NavLink>
+            <NavLink className='nav-link' to='albums'>Albums</NavLink>
+            <NavLink className='nav-link right-nav' to='/login' onClick={()=>clearKeyLS('loggedUser')}>Logout</NavLink>
         </div>
 
         <Outlet context={{userId : id}}/>
