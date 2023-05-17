@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { callFetch, useErrorMessage, useForm } from './Hooks';
+import './Todos.css';
 
 function Todos() {
+  const { id } = useParams();
   const [todos, setTodos] = useState([]);
   const [sortCriterion, setSortCriterion] = useState(null);
-  const { id } = useParams();
-  const [inputs,handleChange] = useForm()
-  const [errorMessage,setErrorMessage] = useErrorMessage()
+  const [inputs, handleChange] = useForm();
+  const [errorMessage, setErrorMessage] = useErrorMessage();
   
   useEffect(() => {
     return  async () => {
-      try{
-        const data = await callFetch(`https://jsonplaceholder.typicode.com/todos?userId=${id}`)
+      try {
+        const data = await callFetch(`https://jsonplaceholder.typicode.com/todos?userId=${id}`);
         setTodos(data);
-      }catch{
-        setErrorMessage("Oops..! You're Not conected!")
+      } catch {
+        setErrorMessage("Oops..! You're Not connected!");
       }
-    }
+    };
   }, []);//only first time 
 
   useEffect(() => {
@@ -37,13 +38,16 @@ function Todos() {
     }
   }, [sortCriterion]);
 
-
   return (
-    <div>
-      <h2>Todos:</h2>
-      <h4>{errorMessage}</h4>
-      <div>
-        <select value={sortCriterion} onChange={(event) => setSortCriterion(event.target.value)}>
+    <div className="click-style">
+      <h2 className="default-style">Todos:</h2>
+      <h4 className="default-style">{errorMessage}</h4>
+      <div className="default-style">
+        <select
+          className="default-style"
+          value={sortCriterion}
+          onChange={(event) => setSortCriterion(event.target.value)}
+        >
           <option value="">Sort by:</option>
           <option value="id">ID</option>
           <option value="completed">Completed</option>
@@ -52,15 +56,19 @@ function Todos() {
         </select>
       </div>
       {todos.map((todo) => (
-        <div key={todo.id}>
+        <div key={todo.id} className="comment-div">
           <input
-          name={`chechbox${todo.id}`}
+            className="default-style"
+            name={`checkbox${todo.id}`}
             type="checkbox"
-            checked={inputs[`chechbox${todo.id}`] === undefined ? 
-                      todo.completed : inputs[`chechbox${todo.id}`]}
+            checked={
+              inputs[`checkbox${todo.id}`] === undefined
+                ? todo.completed
+                : inputs[`checkbox${todo.id}`]
+            }
             onChange={handleChange}
           />
-          <span>{todo.title}</span>
+          <span className="default-style">{todo.title}</span>
         </div>
       ))}
     </div>
@@ -68,3 +76,4 @@ function Todos() {
 }
 
 export default Todos;
+

@@ -1,0 +1,75 @@
+/* Checkbox styles */
+input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    font-style: italic;
+    color: grey;
+  }
+  
+  
+.click-style,
+.default-style{
+    border-radius: 20px;
+    padding-bottom: 1vh;
+    padding: 1vh;
+    text-align: center;
+    margin-bottom: 2vh;
+    background-color: rgb(176, 203, 255);
+
+    box-shadow:
+    1.6px 1.6px 2.2px rgba(0, 0, 0, 0.022),
+    3.1px 3.1px 5.3px rgba(0, 0, 0, 0.032),
+    4.5px 4.5px 10px rgba(0, 0, 0, 0.039),
+    6.1px 6.1px 17.9px rgba(0, 0, 0, 0.044),
+    8.7px 8.7px 33.4px rgba(0, 0, 0, 0.051),
+    17px 17px 80px rgba(0, 0, 0, 0.07)
+    ;
+}
+
+.click-style{
+    border: 2px solid black;
+}
+
+ul{
+    padding: 0px;
+}
+
+/* Commnet */
+.comment-div{
+    text-align: left;
+    background-color: rgb(194, 224, 255);
+    border-radius: 20px;
+    padding: 5px;
+    margin-bottom: 2vh;
+
+    box-shadow:
+    1.6px 1.6px 2.2px rgba(0, 0, 0, 0.022),
+    3.1px 3.1px 5.3px rgba(0, 0, 0, 0.032),
+    4.5px 4.5px 10px rgba(0, 0, 0, 0.039),
+    6.1px 6.1px 17.9px rgba(0, 0, 0, 0.044),
+    8.7px 8.7px 33.4px rgba(0, 0, 0, 0.051),
+    17px 17px 80px rgba(0, 0, 0, 0.07)
+    ;
+    transition: padding 0.3s ease;
+}
+
+.comment-div:hover{
+    padding: 10px;
+}
+
+h4{
+    color: rgb(171, 171, 171);
+    margin: 0;
+    padding: 0;
+}
+
+h2{
+    margin: 0;
+    margin-top: 2vh;
+    padding: 0;
+    text-transform: capitalize;
+}
+
+h1{
+    text-transform: capitalize;
+
+}
