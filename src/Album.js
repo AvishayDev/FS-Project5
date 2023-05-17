@@ -13,6 +13,7 @@ export default function Album() {
                   `https://jsonplaceholder.typicode.com/albums/${id}/photos?_start=0&_limit=10`
                 );
                 const data = await response.json();
+                
                 setPhotos(data);
                 console.log(data);
             } catch (error) {
@@ -30,7 +31,12 @@ export default function Album() {
               `https://jsonplaceholder.typicode.com/albums/${id}/photos?_start=${loadedPhotos}&_limit=10`
             );
             const data = await response.json();
-            setPhotos((prevPhotos) => [...prevPhotos, ...data]);
+            
+            if (loadedPhotos === 0)
+                setPhotos(data);
+            else
+                setPhotos((prevPhotos) => [...prevPhotos, ...data]);
+
             console.log(data);
         } catch (error) {
             console.error('Error fetching ten more pics:', error);
